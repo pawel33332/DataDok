@@ -22,6 +22,16 @@ namespace DataDok.Controllers
         {
             return View();
         }
+        public ActionResult Wyloguj()
+        {
+            if (Session["Username"] != null)
+            {
+                Session.Remove("Username");
+                Session.RemoveAll();
+            }
+            return View("~/Views/Home/index.cshtml");
+
+        }
         [HttpPost]
         public ActionResult Rejestracja(Uzytkownicy uzytkownik)
         {
@@ -31,6 +41,12 @@ namespace DataDok.Controllers
                 {
 
                     db.Uzytkownicy.Add(uzytkownik);
+                    db.SaveChanges();
+                }
+                using(OurDbContext db = new OurDbContext())
+                {
+                    var group = new Grupy { Ksiegowosc =false, Kierownictwo=false,Obsluga_klienta=false,Administracja=false,Admin=false,Szefostwo=false, Uzytkownik_id = uzytkownik.Uzytkownik_id };
+                    db.Grupy.Add(group);
                     db.SaveChanges();
                 }
                 ModelState.Clear();
