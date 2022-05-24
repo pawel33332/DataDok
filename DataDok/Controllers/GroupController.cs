@@ -29,6 +29,7 @@ namespace DataDok.Controllers
                     var uprawnienie_admin = uprawnienia.Admin;
                     if(uprawnienie_administracja==false && uprawnienie_admin==false)
                     {
+                        TempData["komunikat"] = "Nie posiadasz uprawnień";
                         return RedirectToAction("../Account/Login"); 
                     }
                 
@@ -42,6 +43,7 @@ namespace DataDok.Controllers
                 }
             } else
             {
+                TempData["komunikat"] = "Musisz byc zalogowany";
                 return RedirectToAction("../Account/Login");
             }
           
@@ -127,10 +129,10 @@ namespace DataDok.Controllers
                 ViewBag.obsluga_klienta = grupa.Obsluga_klienta;
 
             }
-            
 
 
-            return View("Edytuj_grupe");
+            TempData["zapisano"] = "Pomyslnie zapisano przynaleznosc uzytkownika do grupy";
+            return RedirectToAction("Wyswietl_uzytkownikow");
         }
 
         }

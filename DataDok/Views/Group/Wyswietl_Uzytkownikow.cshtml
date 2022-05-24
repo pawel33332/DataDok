@@ -4,6 +4,7 @@
 }
 
 <h2>Wyswietl Uzytkownikow</h2>
+@TempData["zapisano"]
 <table class="table">
     <tr>
         <th>
@@ -26,25 +27,25 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Uzytkownik_id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Imie)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nazwisko)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.ActionLink("Edycja grupy", "Edytuj_Grupe", new { id = item.Uzytkownik_id })
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uzytkownik_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edycja grupy", "Edytuj_Grupe", new { id = item.Uzytkownik_id })
+            </td>
 
 
-</tr>
+        </tr>
     }
 
 </table>
