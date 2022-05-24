@@ -30,7 +30,7 @@ namespace DataDok.Controllers
                     if(uprawnienie_administracja==false && uprawnienie_admin==false)
                     {
                         TempData["komunikat"] = "Nie posiadasz uprawnień";
-                        return RedirectToAction("../Account/Login"); 
+                        return RedirectToAction("../Account/Zalogowany"); 
                     }
                 
 
@@ -134,6 +134,6 @@ namespace DataDok.Controllers
             TempData["zapisano"] = "Pomyslnie zapisano przynaleznosc uzytkownika do grupy";
             return RedirectToAction("Wyswietl_uzytkownikow");
         }
-
+      
         }
 }
