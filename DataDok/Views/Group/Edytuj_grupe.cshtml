@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Edytuj grupe";
+}
+
+<h2>Edytuj_grupe</h2>
+
+<form action="~/Group/Zapisz" method="post" accept-charset="utf-8">
+
+    <div class="mb-3">
+        Uzytkownik id: @TempData["id_uzytkownika"] 
+        <input type="hidden" name="id_uzyt" value="@TempData["id_uzytkownika"]">
+    </div>
+    <div class="mb-3">
+        Ksiegowość:
+        <input type="checkbox" name="ksiegowosc" />
+    </div>
+    <div class="mb-3">
+        Kierownictwo
+        <input type="checkbox" name="kierownictwo" />
+    </div>
+    <div class="mb-3">
+        Administracja
+        <input type="checkbox" name="administracja" />
+    </div>
+    <div class="mb-3">
+        Szefostwo
+        <input type="checkbox" name="szefostwo" />
+    </div>
+    <div class="mb-3">
+        Obsluga klienta
+        <input type="checkbox" name="obsluga_klienta" />
+    </div>
+
+    <button type="submit" class="btn btn-light">Zapisz</button>
+
+</form>
+<h5 style="color:black">
+    Użytkownik <b>    @ViewBag.ID obecnie nalezy do grup:<br>
+    <b>Ksiegowość:</b>    @ViewBag.ksiegowosc <br />
+    <b>Kierownictwo:</b>  @ViewBag.kierownictwo <br />
+    <b>Administracja:</b> @ViewBag.administracja <br />
+    <b>Szefostwo:</b> @ViewBag.szefostwo <br />
+    <b>Obsługa klienta:</b> @ViewBag.obsluga_klienta <br />
+</h5>
+
+

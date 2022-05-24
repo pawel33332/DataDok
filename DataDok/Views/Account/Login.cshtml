@@ -5,13 +5,14 @@
 }
 
 <h2>Login</h2>
+<b>@TempData["komunikat"]</b>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-      
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
