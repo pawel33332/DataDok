@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Usuń użytkownika";
+}
+
+<h2>Usuwanie użytkownika</h2>
+
+<form action="~/Users/Usun" method="post" accept-charset="utf-8">
+
+    <div class="mb-3">
+        Czy napewno chcesz usunąć uzytkownika o id: @TempData["id_uzytkownika"] 
+        <input type="hidden" name="id_uzyt" value="@TempData["id_uzytkownika"]">
+    </div>
+    
+
+    <button type="submit" class="btn btn-light">Usuń</button>
+
+</form>
+
+

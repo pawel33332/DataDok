@@ -135,6 +135,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +195,13 @@
     <Content Include="Views\Group\Wyswietl_Uzytkownikow.cshtml" />
     <Content Include="Views\Group\Edytuj_grupe.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Users\Dodaj.cshtml" />
+    <Content Include="Views\Shared\Wyswietl_Uzytkownikow.cshtml" />
+    <Content Include="Views\Shared\Edytuj_uzytkownika.cshtml" />
+    <Content Include="Views\Admin\Users\Index.cshtml" />
+    <Content Include="Views\Shared\U_Wyswietl_Uzytkownikow.cshtml" />
+    <Content Include="Views\Shared\Usun_uzytkownika.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,12 +16,9 @@ namespace DataDok.Controllers
             {
                 return View(db.Uzytkownicy.ToList());
             }
-             
+
         }
-        public ActionResult Rejestracja()
-        {
-            return View();
-        }
+
         public ActionResult Wyloguj()
         {
             if (Session["Username"] != null)
@@ -32,6 +29,11 @@ namespace DataDok.Controllers
             return View("~/Views/Home/index.cshtml");
 
         }
+        public ActionResult Rejestracja()
+        {
+            return View();
+        }
+        
         [HttpPost]
         public ActionResult Rejestracja(Uzytkownicy uzytkownik)
         {
@@ -43,9 +45,9 @@ namespace DataDok.Controllers
                     db.Uzytkownicy.Add(uzytkownik);
                     db.SaveChanges();
                 }
-                using(OurDbContext db = new OurDbContext())
+                using (OurDbContext db = new OurDbContext())
                 {
-                    var group = new Grupy { Ksiegowosc =false, Kierownictwo=false,Obsluga_klienta=false,Administracja=false,Admin=false,Szefostwo=false, Uzytkownik_id = uzytkownik.Uzytkownik_id };
+                    var group = new Grupy { Ksiegowosc = false, Kierownictwo = false, Obsluga_klienta = false, Administracja = false, Admin = false, Szefostwo = false, Uzytkownik_id = uzytkownik.Uzytkownik_id };
                     db.Grupy.Add(group);
                     db.SaveChanges();
                 }
@@ -81,7 +83,7 @@ namespace DataDok.Controllers
         }
         public ActionResult Zalogowany()
         {
-            if(Session["UserId"]!=null)
+            if (Session["UserId"] != null)
             {
                 return View("~/Views/Home/index.cshtml");
             }
@@ -91,38 +93,38 @@ namespace DataDok.Controllers
             }
         }
 
-         public ActionResult Admin(Uzytkownicy user)
-         {
-             if (Session["UserId"] != null)
-             {
-                 using (OurDbContext db = new OurDbContext())
-                 {
-                     var a = Convert.ToInt32(Session["UserId"]);
-                     var uprawnienia = db.Grupy.SqlQuery("SELECT * FROM Grupies  WHERE Uzytkownik_id={0}", a).FirstOrDefault();
-                     var uprawnienie_administracja = uprawnienia.Administracja;
-                     var uprawnienie_admin = uprawnienia.Admin;
-                     if (uprawnienie_administracja == false && uprawnienie_admin == false)
-                     {
-                         TempData["komunikat"] = "Nie posiadasz uprawnień";
-                         return RedirectToAction("../Account/Zalogowany");
-                     }
+        public ActionResult Admin()
+        {
+            if (Session["UserId"] != null)
+            {
+                using (OurDbContext db = new OurDbContext())
+                {
+                    var a = Convert.ToInt32(Session["UserId"]);
+                    var uprawnienia = db.Grupy.SqlQuery("SELECT * FROM Grupies  WHERE Uzytkownik_id={0}", a).FirstOrDefault();
+                    var uprawnienie_administracja = uprawnienia.Administracja;
+                    var uprawnienie_admin = uprawnienia.Admin;
+                    if (uprawnienie_administracja == false && uprawnienie_admin == false)
+                    {
+                        TempData["komunikat"] = "Nie posiadasz uprawnień";
+                        return RedirectToAction("../Account/Zalogowany");
+                    }
 
 
-                 }
-                 using (OurDbContext db = new OurDbContext())
-                 {
-                     var uzytkownicy = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies").ToList();
-                     return View("~/Views/Admin/index.cshtml");
+                }
+                using (OurDbContext db = new OurDbContext())
+                {
+                    var uzytkownicy = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies").ToList();
+                    return View("~/Views/Admin/index.cshtml");
 
-                 }
-             }
-             else
-             {
-                 TempData["komunikat"] = "Musisz byc zalogowany";
-                 return RedirectToAction("../Account/Zalogowany");
-             }
-
-    }
+                }
+            }
+            else
+            {
+                TempData["komunikat"] = "Musisz byc zalogowany";
+                return RedirectToAction("../Account/Login");
+            }
+        }
         
-}
+    }
+
 }

@@ -30,7 +30,7 @@ namespace DataDok.Controllers
                     if(uprawnienie_administracja==false && uprawnienie_admin==false)
                     {
                         TempData["komunikat"] = "Nie posiadasz uprawnień";
-                        return RedirectToAction("../Account/Login"); 
+                        return RedirectToAction("../Account/Zalogowany"); 
                     }
                 
 
@@ -118,7 +118,7 @@ namespace DataDok.Controllers
             using (OurDbContext db = new OurDbContext())
             {
                 var grupy = db.Database.ExecuteSqlCommand("Update Grupies SET Ksiegowosc={0}, Kierownictwo={1},Administracja={2}," +
-                "Szefostwo={3}, Obsluga_klienta={4}, Uzytkownik_id={5}", ksiegowosc, kierownictwo,
+                "Szefostwo={3}, Obsluga_klienta={4} WHERE Uzytkownik_id={5}", ksiegowosc, kierownictwo,
                 administracja, szefostwo,obsluga_klienta, id_uzyt);
                 db.SaveChanges();
                 var grupa = db.Grupy.SqlQuery("SELECT * FROM Grupies WHERE Uzytkownik_id={0}", id_uzyt).FirstOrDefault();
@@ -134,6 +134,6 @@ namespace DataDok.Controllers
             TempData["zapisano"] = "Pomyslnie zapisano przynaleznosc uzytkownika do grupy";
             return RedirectToAction("Wyswietl_uzytkownikow");
         }
-
+      
         }
 }
