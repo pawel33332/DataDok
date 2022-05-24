@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DataDok.Models;
 
+
 namespace DataDok.Controllers
 {
     public class AccountController : Controller
@@ -22,6 +23,17 @@ namespace DataDok.Controllers
         {
             return View();
         }
+
+        public ActionResult Wyloguj()
+        {
+            if (Session["Username"]!=null)
+            {
+                Session.Remove("Username");
+                Session.RemoveAll();
+            }
+            return View("~/Views/Home/index.cshtml");
+        }
+
         [HttpPost]
         public ActionResult Rejestracja(Uzytkownicy uzytkownik)
         {
@@ -75,6 +87,7 @@ namespace DataDok.Controllers
             }
         }
 
+       
 
     }
 }
