@@ -193,6 +193,7 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\Wyswietl_Uzytkownikow.cshtml" />
     <Content Include="Views\Group\Edytuj_grupe.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

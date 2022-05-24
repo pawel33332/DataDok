@@ -91,6 +91,38 @@ namespace DataDok.Controllers
             }
         }
 
+         public ActionResult Admin(Uzytkownicy user)
+         {
+             if (Session["UserId"] != null)
+             {
+                 using (OurDbContext db = new OurDbContext())
+                 {
+                     var a = Convert.ToInt32(Session["UserId"]);
+                     var uprawnienia = db.Grupy.SqlQuery("SELECT * FROM Grupies  WHERE Uzytkownik_id={0}", a).FirstOrDefault();
+                     var uprawnienie_administracja = uprawnienia.Administracja;
+                     var uprawnienie_admin = uprawnienia.Admin;
+                     if (uprawnienie_administracja == false && uprawnienie_admin == false)
+                     {
+                         TempData["komunikat"] = "Nie posiadasz uprawnień";
+                         return RedirectToAction("../Account/Zalogowany");
+                     }
+
+
+                 }
+                 using (OurDbContext db = new OurDbContext())
+                 {
+                     var uzytkownicy = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies").ToList();
+                     return View("~/Views/Admin/index.cshtml");
+
+                 }
+             }
+             else
+             {
+                 TempData["komunikat"] = "Musisz byc zalogowany";
+                 return RedirectToAction("../Account/Zalogowany");
+             }
 
     }
+        
+}
 }
