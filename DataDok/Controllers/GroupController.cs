@@ -19,11 +19,30 @@ namespace DataDok.Controllers
         }
         public ActionResult Wyswietl_Uzytkownikow()
         {
-            using (OurDbContext db = new OurDbContext())
+            if (Session["UserId"] != null)
             {
-                var uzytkownicy = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies").ToList();
-                return View(uzytkownicy);
+                using (OurDbContext db = new OurDbContext())
+                {
+                    var a = Convert.ToInt32(Session["UserId"]);
+                    var uprawnienia = db.Grupy.SqlQuery("SELECT * FROM Grupies  WHERE Uzytkownik_id={0}", a).FirstOrDefault();
+                    var uprawnienie_administracja = uprawnienia.Administracja;
+                    var uprawnienie_admin = uprawnienia.Admin;
+                    if(uprawnienie_administracja==false && uprawnienie_admin==false)
+                    {
+                        return RedirectToAction("../Account/Login"); 
+                    }
+                
 
+                }
+                using (OurDbContext db = new OurDbContext())
+                {
+                    var uzytkownicy = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies").ToList();
+                    return View(uzytkownicy);
+
+                }
+            } else
+            {
+                return RedirectToAction("../Account/Login");
             }
           
         }
