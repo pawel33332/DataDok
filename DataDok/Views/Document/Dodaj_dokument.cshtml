@@ -1,0 +1,48 @@
+﻿
+@{
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dodaj_dokument</title>
+</head>
+<body>
+    <div>
+        <form action="~/Document/Dodawanie_dokumentu" method="post" accept-charset="utf-8">
+
+            <div class="mb-3"><br />
+                Uzytkownik id: @TempData["id_uzytkownika"]
+                <input type="hidden" name="id_uzyt" value="@TempData["id_uzytkownika"]">
+            </div>
+
+            <div class="mb-3">
+                Typ dokumentu: <br>
+                <label>
+                    Umowa:
+                     <input type="radio" name="typ"> <br />
+                    Zlecenie:
+                    <input type="radio" name="typ" /><br />
+                    Faktura
+                    <input type="radio" name="typ" /><br />
+                    Rachunek
+                    <input type="radio" name="typ" /><br />
+                 </label>
+            </div>
+            <div class="mb-3">
+                Data dokumentu: <input type="date" name="data_dokumentu" required />
+            </div>
+          
+            <div class="mb-3">
+                Załącz plik dokumentu(format pdf):<input type="file" name="file" required />
+            </div>
+          
+            <button type="submit" class="btn btn-light">Dodaj dokument</button>
+
+        </form>
+    </div>
+</body>
+</html>

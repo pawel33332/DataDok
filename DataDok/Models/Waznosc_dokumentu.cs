@@ -15,10 +15,9 @@ namespace DataDok.Models
     }
     public class Waznosc_dokumentu
     {
+        [Key]
         public int Waznosc_dokumentuID { get; set; }
         public Waznosc_dok waznosc  { get; set; }
-        [ForeignKey("Dokument")]
-        public int DokumentID { get; set; }
-        public Dokument Dokument { get; set; }
+    
     }
 }
