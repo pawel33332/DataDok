@@ -1,0 +1,63 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Moje_dokumenty</title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    DokumentID
+                </th>
+                <th>
+                    Nazwa dokumentu
+                </th>
+                <th>
+                    Data dokumentu)
+                </th>
+                <th>
+                    Sciezka
+                </th>
+                <th>
+                    Rodzaj dokumentu
+                </th>
+                <th>
+                    Status dokumentu
+                </th>
+
+            </tr>
+
+            @foreach (Params dokument in ViewBag.dokumenty)
+            {
+                <tr>
+                    <td>
+                        @dokument.ID
+                    </td>
+                    <td>
+                        @dokument.nazwa
+                    </td>
+                    <td>
+                        @dokument.data
+                    </td>
+                    <td>
+                        @dokument.sciezka
+                    </td>
+                    <td>
+                        @dokument.rodzaj
+                    </td>
+                    <td>
+                        @TempData["status"]
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</body>
+</html>

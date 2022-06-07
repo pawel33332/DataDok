@@ -209,6 +209,7 @@
     <Content Include="Views\Shared\Usun_uzytkownika.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Document\Dodaj_dokument.cshtml" />
+    <Content Include="Views\Document\Moje_dokumenty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
