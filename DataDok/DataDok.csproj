@@ -149,6 +149,7 @@
     <Compile Include="Models\Grupy.cs" />
     <Compile Include="Models\ID_Rodzajow.cs" />
     <Compile Include="Models\OurDbContext.cs" />
+    <Compile Include="Models\Potwierdzenia.cs" />
     <Compile Include="Models\Rodzaj_dokumentu.cs" />
     <Compile Include="Models\Uprawnienia.cs" />
     <Compile Include="Models\Uzytkownicy.cs" />

@@ -13,5 +13,6 @@ namespace DataDok.Models
         public DbSet<Uprawnienia> Uprawnienia { get; set; }
         public DbSet<Dokument> Dokument { get; set; }
         public DbSet<Waznosc_dokumentu> Waznosc_dokumentu { get; set; }
+        public DbSet<Potwierdzenia> Potwierdzenia{ get; set; }
     }
 }
