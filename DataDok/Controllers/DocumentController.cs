@@ -8,7 +8,7 @@ public class Params
 {
     public int ID { get; set; }
     public string nazwa { get; set; }
-    public DateTime data { get; set; }
+    public System.DateTime data { get; set; }
     public string sciezka { get; set; }
     public int rodzaj { get; set; }
     public bool ksiegowosc { get; set; }
@@ -111,7 +111,7 @@ namespace DataDok.Controllers
         int id_uzytkownika = Convert.ToInt32(Session["UserId"]);
             using (OurDbContext db = new OurDbContext())
             {
-                //var dokumenty = db.Dokument.SqlQuery("SELECT * FROM Dokuments WHERE Uzytkownik_id={0}", id_uzytkownika).ToList();
+                var dokumenty2 = db.Dokument.SqlQuery("SELECT * FROM Dokuments WHERE Uzytkownik_id={0}", id_uzytkownika).ToList();
                 var dokumenty = (from d in db.Dokument
                                  join p in db.Potwierdzenia on d.DokumentID equals p.DokumentID
                                  where d.Uzytkownik_id == id_uzytkownika
@@ -130,49 +130,56 @@ namespace DataDok.Controllers
                                      admin = p.Admin
                                  }).ToList();
                 ViewBag.dokumenty = dokumenty;
+                List<string> Statusy = new List<string>();
+                
                 foreach (var p in dokumenty)
                 {
                     var suma = Convert.ToInt32(p.ksiegowosc) + Convert.ToInt32(p.kierownictwo) + Convert.ToInt32(p.administracja) + Convert.ToInt32(p.szefostwo)
                     + Convert.ToInt32(p.obsluga_klienta) + Convert.ToInt32(p.admin);
                     if (suma > 5)
                     {
-                        TempData["status"] = "Zatwierdzony";
+                        Statusy.Add("Zatwierdzony");
                     }
                     else
                     {
-                        TempData["status"] = "Wymaga potwierdzenia przez: ";
+                        string status_niezatwierdzone="Niezatwierdzony. Wymaga potwierdzenia przez ";
+
                         if (p.ksiegowosc == false)
                         {
-                            TempData["status"] += "ksiegowosc, ";
+                            status_niezatwierdzone += "ksiegowosc, ";
                         }
                         if (p.kierownictwo == false)
                         {
-                            TempData["status"] += "kierownictwo, ";
+                            status_niezatwierdzone += "kierownictwo, ";
                         }
                         if (p.administracja == false)
                         {
-                            TempData["status"] += "administracja, ";
+                            status_niezatwierdzone += "administracja, ";
                         }
                         if (p.szefostwo == false)
                         {
-                            TempData["status"] += "szefostwo, ";
+                            status_niezatwierdzone += "szefostwo, ";
                         }
                         if (p.obsluga_klienta == false)
                         {
-                            TempData["status"] += "obsluge klienta, ";
+                            status_niezatwierdzone += "obsluge klienta, ";
                         }
                         if (p.admin == false)
                         {
-                            TempData["status"] += "admina";
+                            status_niezatwierdzone += "admina";
                         }
+                        Statusy.Add(status_niezatwierdzone);
                     }
+                 
+
+                    TempData["status"] = Statusy;
                 }
-                    /*
-                    var suma = Convert.ToInt32(ksiegowosc) + Convert.ToInt32(kierownictwo)+Convert.ToInt32(administracja)+ Convert.ToInt32(szefostwo)
-                        + Convert.ToInt32(obsluga_klienta) + Convert.ToInt32(admin); //jezeli dokument potwierdzony u wszystkich
-                    */
-               return View(ViewBag.dokumenty);
-                }
+                /*
+                var suma = Convert.ToInt32(ksiegowosc) + Convert.ToInt32(kierownictwo)+Convert.ToInt32(administracja)+ Convert.ToInt32(szefostwo)
+                    + Convert.ToInt32(obsluga_klienta) + Convert.ToInt32(admin); //jezeli dokument potwierdzony u wszystkich
+                */
+                return View(dokumenty2);
+            }
             
             }
     }

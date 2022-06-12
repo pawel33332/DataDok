@@ -1,6 +1,4 @@
-﻿
-<!DOCTYPE html>
-
+﻿@model IEnumerable<DataDok.Models.Dokument>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -8,55 +6,66 @@
 </head>
 <body>
     <div>
-        <table class="table">
+        <table class="table" style="float: left; width: 50%;">
             <tr>
                 <th>
-                    DokumentID
+                    Rodzaj dokumentu
                 </th>
                 <th>
                     Nazwa dokumentu
                 </th>
                 <th>
-                    Data dokumentu)
+                    Data dokumentu
                 </th>
                 <th>
                     Sciezka
                 </th>
-                <th>
-                    Rodzaj dokumentu
-                </th>
-                <th>
-                    Status dokumentu
-                </th>
+
 
             </tr>
 
-            @foreach (Params dokument in ViewBag.dokumenty)
+
+            @foreach (var dokument in Model)
             {
-                <tr>
+                <tr style="height:70px;">
                     <td>
-                        @dokument.ID
+                        @dokument.ID_Rodzajow_id
                     </td>
                     <td>
-                        @dokument.nazwa
+                        @dokument.nazwa_dokumentu
                     </td>
                     <td>
-                        @dokument.data
+                        @dokument.data_dokumentu
                     </td>
                     <td>
                         @dokument.sciezka
                     </td>
-                    <td>
-                        @dokument.rodzaj
-                    </td>
-                    <td>
-                        @TempData["status"]
-                    </td>
 
                 </tr>
-            }
 
+            }
         </table>
+        <table class="table" style="float: right; width: 45%;">
+            <tr>
+            <th >
+                Status
+            </th>
+            </tr>
+            @foreach (var dok in TempData["status"] as List<string>)
+            {
+                <tr style="height:70px">
+                    <td>
+                        @dok
+                    </td>
+                </tr>
+
+
+            }
+        </table>
+
+
+
+
 
     </div>
 </body>
