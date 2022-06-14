@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DataDok.Models.OurDbContext-Web.config Connection String" description="DataDok.Models.OurDbContext Parametry połączenia używane w pliku web.config przez aplikację w celu uzyskiwania dostępu do bazy danych." defaultValue="DataDok.Models.OurDbContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\mateu\\source\\repos\\pawel33332\\DataDok\\DataDok\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataDok.Models.OurDbContext']/@connectionString" />
+  </parameter>
+</parameters>

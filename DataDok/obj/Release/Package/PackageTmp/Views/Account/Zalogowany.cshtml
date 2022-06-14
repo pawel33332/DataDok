@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Zalogowany";
+}
+@if (Session["UserId"]!=null)
+ {
+    <h5>Witaj @Session["Username"].ToString()</h5>
+    return View("Home", "Index");
+}
+
+
+

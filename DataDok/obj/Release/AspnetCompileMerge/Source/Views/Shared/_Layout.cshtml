@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DataDok</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+
+    <div class="container body-content" style="margin-left:50px;">
+        <a href="/Home/Index" class="brand-link" style="margin-left:50px;">
+            <img src="~/images/logo.png" style="height:50px;width:50px;" />
+
+            <span class="brand-text font-weight-light">System obiegu dokumentu</span>
+        </a>
+        @if (Session["Username"] == null)
+        {
+            <a href="/Account/rejestracja" class="brand-link" style="margin-left:50px;">
+                <img src="~/images/rejestracja.png" style="height:50px;width:50px;" />
+                <span class="brand-text font-weight-light">Zarejestruj się</span>
+
+            </a>
+            <a href="/Account/login" class="brand-link" style="margin-left:50px;">
+                <img src="~/images/logowanie.png" style="height:50px;width:50px;" />
+                <span class="brand-text font-weight-light">Zaloguj się</span>
+
+            </a>
+        }
+        else
+        {
+            <a href="#" class="brand-link" style="margin-left:50px;">
+                <img src="~/images/logowanie.png" style="height:50px;width:50px;" />
+                <span class="brand-text font-weight-light">Zalogowano jako: @Session["Username"].ToString()</span>
+
+            </a>
+            <a href="/Account/Wyloguj" class="brand-link" style="margin-left:50px;">
+                <img src="~/images/logowanie.png" style="height:50px;width:50px;" />
+                <span class="brand-text font-weight-light">Wyloguj</span>
+
+            </a>
+            <a href="/Account/Admin" class="brand-link" style="margin-left:50px;">
+                <img src="~/images/admin.png" style="height:50px;width:50px;" />
+                <span class="brand-text font-weight-light">Panel Administratora</span>
+
+            </a>
+
+        }
+        <a href="/Home/Contact" class="brand-link" style="margin-left:50px;">
+            <img src="~/images/kontakt.png" style="height:50px;width:50px;" />
+            <span class="brand-text font-weight-light">Kontakt</span>
+
+        </a>
+        @RenderBody()
+        <hr />
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year DataDok</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
