@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -146,10 +147,14 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Dokument.cs" />
     <Compile Include="Models\Grupy.cs" />
+    <Compile Include="Models\ID_Rodzajow.cs" />
     <Compile Include="Models\OurDbContext.cs" />
+    <Compile Include="Models\Potwierdzenia.cs" />
+    <Compile Include="Models\Rodzaj_dokumentu.cs" />
     <Compile Include="Models\Uprawnienia.cs" />
     <Compile Include="Models\Uzytkownicy.cs" />
     <Compile Include="Models\Waznosc_dokumentu.cs" />
+    <Compile Include="Models\Wlasciwosci.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +208,11 @@
     <Content Include="Views\Admin\Users\Index.cshtml" />
     <Content Include="Views\Shared\U_Wyswietl_Uzytkownikow.cshtml" />
     <Content Include="Views\Shared\Usun_uzytkownika.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Document\Dodaj_dokument.cshtml" />
+    <Content Include="Views\Document\Moje_dokumenty.cshtml" />
+    <Content Include="Views\Document\Wyswietl_dokumenty.cshtml" />
+    <Content Include="Views\Document\Wyswietl_dane.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

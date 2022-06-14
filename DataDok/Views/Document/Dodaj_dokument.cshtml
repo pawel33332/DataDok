@@ -1,0 +1,76 @@
+﻿
+@{
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dodaj_dokument</title>
+</head>
+<body>
+    <div>
+        <form action="~/Document/Dodawanie_dokumentu" method="post" accept-charset="utf-8" >
+
+            <div class="mb-3">
+                <br />
+                Uzytkownik id: @TempData["id_uzytkownika"]
+                <input type="hidden" name="id_uzyt" value="@TempData["id_uzytkownika"]">
+            </div>
+            <div class="mb-3">
+                Nazwa dokumentu: <input type="text" name="nazwa_dokumentu" required />
+            </div>
+            <div class="mb-3">
+                Typ dokumentu: <br>
+                <label>
+                    Umowa:
+                    <input type="radio" id="um" name="typ" value="1"> <br />
+                    Zlecenie:
+                    <input type="radio" id="zl" name="typ" value="2" /><br />
+                    Faktura
+                    <input type="radio" id="fa" name="typ" value="3" /><br />
+                    Rachunek
+                    <input type="radio" id="ra" name="typ" value="4" /><br />
+                </label>
+            </div>
+            <div class="mb-3">
+                Data dokumentu: <input type="date" name="data_dokumentu" required />
+            </div>
+
+            <div class="mb-3">
+                Podaj sciezke do pliku:<input type="text" name="file" placeholder="/Dokumenty/<nazwa_grupy>/<nazwa_pliku>" size="70" required/>
+            </div>
+            <div class="mb-3">
+                Które działy muszą potwierdzić dokument <br />
+                Ksiegowość:
+                <input type="checkbox" name="ksiegowosc" />
+            </div>
+            <div class="mb-3">
+                Kierownictwo
+                <input type="checkbox" name="kierownictwo" />
+            </div>
+            <div class="mb-3">
+                Administracja
+                <input type="checkbox" name="administracja" />
+            </div>
+            <div class="mb-3">
+                Szefostwo
+                <input type="checkbox" name="szefostwo" />
+            </div>
+            <div class="mb-3">
+                Obsluga klienta
+                <input type="checkbox" name="obsluga_klienta" />
+            </div>
+            <div class="mb-3">
+                Admin
+                <input type="checkbox" name="admin" />
+            </div>
+
+            <button type="submit" class="btn btn-light">Dodaj dokument</button>
+
+        </form>
+    </div>
+</body>
+</html>
