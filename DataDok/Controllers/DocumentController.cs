@@ -131,7 +131,7 @@ namespace DataDok.Controllers
                 if (uprawnienie_administracja == false && uprawnienie_admin == false && uprawnienie_szefostwo == false)
                 {
                     TempData["komunikat"] = "Nie jestes przypisany do żadnej z grup: administratora,admina,szefostwa ";
-                    return RedirectToAction("../Account/Zalogowany");
+                    return RedirectToAction("../Account/Login");
                 } else
                 {
                  var wszystkie_dokumenty = db.Dokument.SqlQuery("SELECT * FROM Dokuments").ToList();  
