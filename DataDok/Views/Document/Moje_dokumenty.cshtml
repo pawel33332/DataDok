@@ -8,9 +8,7 @@
     <div>
         <table class="table" style="float: left; width: 50%;">
             <tr>
-                <th>
-                    Rodzaj dokumentu
-                </th>
+                
                 <th>
                     Nazwa dokumentu
                 </th>
@@ -28,9 +26,6 @@
             @foreach (var dokument in Model)
             {
                 <tr style="height:70px;">
-                    <td>
-                        @dokument.ID_Rodzajow_id
-                    </td>
                     <td>
                         @dokument.nazwa_dokumentu
                     </td>
@@ -63,9 +58,7 @@
             }
         </table>
 
-
-
-
+        <div style="clear:both"></div>
 
     </div>
 </body>

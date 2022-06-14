@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DataDok.Models.Dokument>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Moje_dokumenty</title>
+</head>
+<body>
+    <div>
+        <table class="table" style="float: left; width: 50%;">
+            <tr>
+                <th>
+                 Dodany przez
+                </th>
+                <th>
+                    Rodzaj dokumentu
+                </th>
+                <th>
+                    Nazwa dokumentu
+                </th>
+                <th>
+                    Data dokumentu
+                </th>
+                <th>
+                    Sciezka
+                </th>
+
+
+            </tr>
+
+
+            @foreach (var dokument in Model)
+            {
+        <tr style="height:70px;">
+            <td>
+                @dokument.Uzytkownik_id
+            </td>
+            <td>
+                @dokument.ID_Rodzajow_id
+            </td>
+            <td>
+                @dokument.nazwa_dokumentu
+            </td>
+            <td>
+                @dokument.data_dokumentu
+            </td>
+            <td>
+                @dokument.sciezka
+            </td>
+
+        </tr>
+
+            }
+        </table>
+</div>
+</body>
+</html>

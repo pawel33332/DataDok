@@ -28,7 +28,14 @@ namespace DataDok.Controllers
         // GET: Document
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            } else
+            {
+                TempData["komunikat"] = "Musisz byc zalogowany";
+                return RedirectToAction("../Account/Login");
+            }
         }
         public ActionResult Dodaj_dokument()
         {
@@ -103,7 +110,25 @@ namespace DataDok.Controllers
         }
         public ActionResult Wyswietl_dokumenty()
         {
-            return View();
+            using (OurDbContext db = new OurDbContext())
+            {
+                var a = Convert.ToInt32(Session["UserId"]);
+                var uprawnienia = db.Grupy.SqlQuery("SELECT * FROM Grupies  WHERE Uzytkownik_id={0}", a).FirstOrDefault();
+                var uprawnienie_administracja = uprawnienia.Administracja;
+                var uprawnienie_admin = uprawnienia.Admin;
+                var uprawnienie_szefostwo = uprawnienia.Szefostwo;
+                if (uprawnienie_administracja == false && uprawnienie_admin == false && uprawnienie_szefostwo == false)
+                {
+                    TempData["komunikat"] = "Nie jestes przypisany do żadnej z grup: administratora,admina,szefostwa ";
+                    return RedirectToAction("../Account/Zalogowany");
+                } else
+                {
+                 var wszystkie_dokumenty = db.Dokument.SqlQuery("SELECT * FROM Dokuments").ToList();
+                 return View(wszystkie_dokumenty);
+                }
+               
+            }
+                
         }
         public ActionResult Moje_dokumenty()
         {
@@ -170,7 +195,6 @@ namespace DataDok.Controllers
                         }
                         Statusy.Add(status_niezatwierdzone);
                     }
-                 
 
                     TempData["status"] = Statusy;
                 }
@@ -178,7 +202,17 @@ namespace DataDok.Controllers
                 var suma = Convert.ToInt32(ksiegowosc) + Convert.ToInt32(kierownictwo)+Convert.ToInt32(administracja)+ Convert.ToInt32(szefostwo)
                     + Convert.ToInt32(obsluga_klienta) + Convert.ToInt32(admin); //jezeli dokument potwierdzony u wszystkich
                 */
-                return View(dokumenty2);
+                    if(TempData["status"]!=null)
+                {
+                     return View(dokumenty2);
+                } else
+                {
+                    TempData["dokumenty"] = "Nie dodałeś zadnych dokumentów";
+                    return View("Index");
+                }
+                    
+                   
+                
             }
             
             }
