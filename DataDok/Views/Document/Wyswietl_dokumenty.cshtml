@@ -4,12 +4,30 @@
     <meta name="viewport" content="width=device-width" />
     <title>Moje_dokumenty</title>
 </head>
+
 <body>
+    <script>
+        function rodzaj(a) {
+            if (a == 1) {
+                alert("Umowa");
+            }
+            else if (a == 2) {
+                alert("Zlecenie");
+            }
+            else if (a == 3) {
+                alert("Faktura");
+            }
+            else if (a == 4) {
+                alert("Rachunek");
+            }
+        }
+    </script>
     <div>
+        <br />
         <table class="table" style="float: left; width: 50%;">
             <tr>
                 <th>
-                 Dodany przez
+                    Dodany przez id:
                 </th>
                 <th>
                     Rodzaj dokumentu
@@ -30,27 +48,47 @@
 
             @foreach (var dokument in Model)
             {
-        <tr style="height:70px;">
-            <td>
-                @dokument.Uzytkownik_id
-            </td>
-            <td>
-                @dokument.ID_Rodzajow_id
-            </td>
-            <td>
-                @dokument.nazwa_dokumentu
-            </td>
-            <td>
-                @dokument.data_dokumentu
-            </td>
-            <td>
-                @dokument.sciezka
-            </td>
+                <tr style="height:70px;">
+                    <td>
+                        @Html.ActionLink(@dokument.Uzytkownik_id.ToString(), "Wyswietl_dane", new { id = dokument.Uzytkownik_id })
+                    </td>
+                    <td id="rodzaj" onclick="rodzaj(@dokument.ID_Rodzajow_id)">
+                        <a>@dokument.ID_Rodzajow_id</a>
 
-        </tr>
+                    </td>
+                    <td>
+                        @dokument.nazwa_dokumentu
+                    </td>
+                    <td>
+                        @dokument.data_dokumentu
+                    </td>
+                    <td>
+                        <a href="@dokument.sciezka">Link</a>
+                    </td>
+
+                </tr>
 
             }
         </table>
-</div>
+        <table class="table" style="float: right; width: 45%;">
+            <tr>
+                <th>
+                    Status <br />dokumentu
+                </th>
+            </tr>
+            @foreach (var dok in TempData["status"] as List<string>)
+            {
+                <tr style="height:70px">
+                    <td>
+                        @dok
+                    </td>
+                </tr>
+
+
+            }
+        </table>
+
+        <div style="clear:both"></div>
+    </div>
 </body>
 </html>

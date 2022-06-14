@@ -1,0 +1,48 @@
+﻿@model DataDok.Models.Uzytkownicy
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Wyswietl_dane</title>
+</head>
+<body>
+    <div>
+        <h4>Uzytkownicy</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Imie)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Imie)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nazwisko)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nazwisko)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+    
+        </dl>
+    </div>
+  
+</body>
+</html>

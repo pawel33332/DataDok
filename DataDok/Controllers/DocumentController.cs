@@ -37,7 +37,17 @@ namespace DataDok.Controllers
                 return RedirectToAction("../Account/Login");
             }
         }
-        public ActionResult Dodaj_dokument()
+        public ActionResult Wyswietl_dane(int id)
+        {
+            using (OurDbContext db = new OurDbContext())
+            {
+                var uzytkownik = db.Uzytkownicy.SqlQuery("SELECT * FROM Uzytkownicies WHERE Uzytkownik_id={0}", id).FirstOrDefault();
+                return View(uzytkownik);
+                
+            }
+        }
+
+            public ActionResult Dodaj_dokument()
         {
             @TempData["id_uzytkownika"] = Convert.ToInt32(Session["UserId"]);
             return View();
@@ -117,14 +127,75 @@ namespace DataDok.Controllers
                 var uprawnienie_administracja = uprawnienia.Administracja;
                 var uprawnienie_admin = uprawnienia.Admin;
                 var uprawnienie_szefostwo = uprawnienia.Szefostwo;
+              
                 if (uprawnienie_administracja == false && uprawnienie_admin == false && uprawnienie_szefostwo == false)
                 {
                     TempData["komunikat"] = "Nie jestes przypisany do żadnej z grup: administratora,admina,szefostwa ";
                     return RedirectToAction("../Account/Zalogowany");
                 } else
                 {
-                 var wszystkie_dokumenty = db.Dokument.SqlQuery("SELECT * FROM Dokuments").ToList();
-                 return View(wszystkie_dokumenty);
+                 var wszystkie_dokumenty = db.Dokument.SqlQuery("SELECT * FROM Dokuments").ToList();  
+                 var dokumenty = (from d in db.Dokument
+                                 join p in db.Potwierdzenia on d.DokumentID equals p.DokumentID
+                                 select new
+                                 {
+                                     ID = d.DokumentID,
+                                     nazwa = d.nazwa_dokumentu,
+                                     data = d.data_dokumentu,
+                                     sciezka = d.sciezka,
+                                     rodzaj = d.ID_Rodzajow_id,
+                                     ksiegowosc = p.Ksiegowosc,
+                                     kierownictwo = p.Kierownictwo,
+                                     administracja = p.Administracja,
+                                     szefostwo = p.Szefostwo,
+                                     obsluga_klienta = p.Obsluga_klienta,
+                                     admin = p.Admin
+                                 }).ToList();
+                    ViewBag.dokumenty = dokumenty;
+                    List<string> Statusy = new List<string>();
+
+                    foreach (var p in dokumenty)
+                    {
+                        var suma = Convert.ToInt32(p.ksiegowosc) + Convert.ToInt32(p.kierownictwo) + Convert.ToInt32(p.administracja) + Convert.ToInt32(p.szefostwo)
+                        + Convert.ToInt32(p.obsluga_klienta) + Convert.ToInt32(p.admin);
+                        if (suma > 5)
+                        {
+                            Statusy.Add("Zatwierdzony");
+                        }
+                        else
+                        {
+                            string status_niezatwierdzone = "Niezatwierdzony. Wymaga potwierdzenia przez ";
+
+                            if (p.ksiegowosc == false)
+                            {
+                                status_niezatwierdzone += "ksiegowosc, ";
+                            }
+                            if (p.kierownictwo == false)
+                            {
+                                status_niezatwierdzone += "kierownictwo, ";
+                            }
+                            if (p.administracja == false)
+                            {
+                                status_niezatwierdzone += "administracja, ";
+                            }
+                            if (p.szefostwo == false)
+                            {
+                                status_niezatwierdzone += "szefostwo, ";
+                            }
+                            if (p.obsluga_klienta == false)
+                            {
+                                status_niezatwierdzone += "obsluge klienta, ";
+                            }
+                            if (p.admin == false)
+                            {
+                                status_niezatwierdzone += "admina";
+                            }
+                            Statusy.Add(status_niezatwierdzone);
+                        }
+
+                        TempData["status"] = Statusy;
+                    }
+                        return View(wszystkie_dokumenty);
                 }
                
             }

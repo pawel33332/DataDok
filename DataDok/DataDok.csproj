@@ -211,6 +211,7 @@
     <Content Include="Views\Document\Dodaj_dokument.cshtml" />
     <Content Include="Views\Document\Moje_dokumenty.cshtml" />
     <Content Include="Views\Document\Wyswietl_dokumenty.cshtml" />
+    <Content Include="Views\Document\Wyswietl_dane.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
